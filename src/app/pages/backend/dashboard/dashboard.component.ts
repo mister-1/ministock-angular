@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ProductService } from '../../../services/product.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  //สรา้งตัวแปรมารับค่าจาก API
+  dataProduct:any=[]
+
+
+  constructor(public api: ProductService) { }
 
   ngOnInit(): void {
+  this.api.getProducts().subscribe((data:{})=>{
+console.log(data);
+this.dataProduct=data;
+
+  })
   }
 
 }
